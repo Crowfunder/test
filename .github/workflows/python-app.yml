@@ -28,6 +28,9 @@ jobs:
         with:
           python-version: '3.10' 
           architecture: 'x64' 
+          cache: 'pip'
+          cache-dependency-path: |
+            **/requirements*.txt
 
       - name: Compile kozmadeus-gui
         uses: Nuitka/Nuitka-Action@main
@@ -47,14 +50,12 @@ jobs:
 
       - name: Move all dist files into general folder
         run: |
-          mkdir build/kozmadeus
-          robocopy build/test.dist build/kozmadeus /MIR
-          robocopy build/best.dist build/kozmadeus /MIR
-          exit 0
+          Move-Item -Force build/test.dist build/artifact/Kozmadeus
+          Move-Item -Force build/best.dist build/artifact/Kozmadeus
 
       # Uploads artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: kozmadeus
-          path: build/kozmadeus
+          path: build/artifact
