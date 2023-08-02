@@ -41,18 +41,18 @@ jobs:
           standalone: true
           onefile: false
 
-      - name: Move all dist files into general folder
-        run: |
-          mkdir build/artifact
-          Move-Item -Force build/test.dist/* build/artifact
+#      - name: Move all dist files into general folder
+#        run: |
+#          mkdir build/artifact
+#          Move-Item -Force build/test.dist/* build/artifact
 
       - uses: sigstore/gh-action-sigstore-python@v1.2.3
         with:
-          inputs: build/artifact/test.exe 
+          inputs: ./build/test.dist/test.exe 
 
       # Uploads artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Windows Build
-          path: build/artifact
+          path: build/test.dist
