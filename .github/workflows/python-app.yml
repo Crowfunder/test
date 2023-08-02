@@ -50,6 +50,7 @@ jobs:
 
       - name: Move all dist files into general folder
         run: |
+          mkdir build/artifact/Kozmadeus
           Move-Item -Force build/test.dist build/artifact/Kozmadeus
           Move-Item -Force build/best.dist build/artifact/Kozmadeus
 
