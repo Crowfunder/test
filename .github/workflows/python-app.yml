@@ -41,7 +41,7 @@ jobs:
         run: |
           mkdir build/kozmadeus
           robocopy build/test.dist build/kozmadeus /MIR
-          EXIT /B
+          exit 0
 
       - name: Zip the release
         run: tar.exe -a -c -f build/test.zip build/kozmadeus
