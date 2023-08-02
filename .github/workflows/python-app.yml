@@ -57,7 +57,7 @@ jobs:
 
       - uses: sigstore/gh-action-sigstore-python@v1.2.3
         with:
-          inputs: build/artifact/*.exe
+          inputs: ./build/artifact/*.exe
 
       # Uploads artifact
       - name: Upload Artifact
