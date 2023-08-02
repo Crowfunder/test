@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
 
@@ -50,21 +51,17 @@ jobs:
 
       - name: Move all dist files into general folder
         run: |
-          mkdir build/artifact/gui
-          mkdir build/artifact/cli
-          Move-Item -Force build/test.dist/* build/artifact/gui
-          Move-Item -Force build/best.dist/* build/artifact/cli
+          mkdir build/artifact
+          Move-Item -Force build/test.dist/* build/artifact
+          Move-Item -Force build/best.dist/* build/artifact
+
+      - uses: sigstore/gh-action-sigstore-python@v1.2.3
+        with:
+          inputs: build/artifact/*.exe
 
       # Uploads artifact
-      - name: Upload GUI Artifact
+      - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Windows GUI Build
-          path: build/artifact/gui
-
-      # Uploads artifact
-      - name: Upload CLI Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: Windows CLI Build
-          path: build/artifact/cli
+          name: Windows Build
+          path: build/artifact
