@@ -35,6 +35,7 @@ jobs:
           nuitka-version: main
           script-name: test.py
           standalone: true
+          onefile: false
 
       # Uploads artifact
       - name: Upload Artifact
