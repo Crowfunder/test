@@ -50,13 +50,21 @@ jobs:
 
       - name: Move all dist files into general folder
         run: |
-          mkdir build/artifact/Kozmadeus
-          Move-Item -Force build/test.dist/* build/artifact/Kozmadeus
-          Move-Item -Force build/best.dist/* build/artifact/Kozmadeus
+          mkdir build/artifact/gui
+          mkdir build/artifact/cli
+          Move-Item -Force build/test.dist/* build/artifact/gui
+          Move-Item -Force build/best.dist/* build/artifact/cli
 
       # Uploads artifact
-      - name: Upload Artifact
+      - name: Upload GUI Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: kozmadeus
-          path: build/artifact
+          name: Windows GUI Build
+          path: build/artifact/gui
+
+      # Uploads artifact
+      - name: Upload CLI Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Windows CLI Build
+          path: build/artifact/cli
