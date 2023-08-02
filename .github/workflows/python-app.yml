@@ -37,10 +37,19 @@ jobs:
           standalone: true
           onefile: false
 
-      - name: Move GUI files into general folder
+      - name: Compile kozmadeus-cli
+        uses: Nuitka/Nuitka-Action@main
+        with:
+          nuitka-version: main
+          script-name: best.py
+          standalone: true
+          onefile: false
+
+      - name: Move all dist files into general folder
         run: |
           mkdir build/kozmadeus
           robocopy build/test.dist build/kozmadeus /MIR
+          robocopy build/best.dist build/kozmadeus /MIR
           exit 0
 
       # Uploads artifact
