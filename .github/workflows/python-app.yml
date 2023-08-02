@@ -37,9 +37,17 @@ jobs:
           standalone: true
           onefile: false
 
+      - name: Move GUI files into general folder
+        run: |
+          mkdir kozmadeus
+          robocopy build/test.dist kozmadeus /MIR
+
+      - name: Zip the release
+        run: tar.exe -a -c -f build/test.zip build/kozmadeus
+
       # Uploads artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: exe
-          path: build/test.exe
+          name: zip
+          path: build/test.zip
