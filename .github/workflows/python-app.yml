@@ -39,13 +39,13 @@ jobs:
 
       - name: Move GUI files into general folder
         run: |
-          mkdir kozmadeus
-          robocopy build/test.dist kozmadeus /MIR
+          mkdir build/kozmadeus
+          robocopy build/test.dist build/kozmadeus /MIR
           exit 0
 
       # Uploads artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: zip
-          path: kozmadeus
+          name: kozmadeus
+          path: build/kozmadeus
