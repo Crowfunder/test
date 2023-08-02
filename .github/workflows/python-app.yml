@@ -39,8 +39,8 @@ jobs:
 
       - name: Move GUI files into general folder
         run: |
-          mkdir kozmadeus
-          robocopy build/test.dist kozmadeus /MIR
+          mkdir build/kozmadeus
+          robocopy build/test.dist build/kozmadeus /MIR
 
       - name: Zip the release
         run: tar.exe -a -c -f build/test.zip build/kozmadeus
